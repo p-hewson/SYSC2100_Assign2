@@ -1,9 +1,30 @@
 public class TestListReferenceBased{
-  private Node head;
-  public void main(String args[]){
+  private static Node head = new Node(null);
+  public static void main(String[] args){
+    Node node0 = new Node(12,null);
+    Node node1 = new Node(3,null);
+    Node node2 = new Node(25,null);
+    Node node3 = new Node(18,null);
+    Node node4 = new Node(13,null);
+
+    Add(node0,0);
+    Add(node1,1);
+    Add(node2,2);
+    Add(node3,3);
+    Add(node4,0);
+    System.out.print(size(head));
+    System.out.print(" Items in the linked list: ");
+    for(Node ptr = head; ptr.getNext() != null; ptr = ptr.getNext()){
+      if(ptr.getNext() == null){
+        System.out.print(ptr.getData());
+      }
+      else{
+        System.out.print(ptr.getData() + ", ");
+      }
+    }
   }
 
-  public void Add(Node node, int data, int index){
+  public static void Add(Node node, int index){
     Node ptr = head.getNext();
     Node prev = head;
     if(index == 0){
@@ -20,20 +41,20 @@ public class TestListReferenceBased{
     }
   }
 
-  public boolean isEmpty(Node node){
+  public static boolean isEmpty(Node node){
     if(head == null) return true;
     else return false;
   }
 
-  public int size(Node node){
+  public static int size(Node node){
     int count = 0;
-    for(Node ptr = head; ptr != null; ptr = ptr.getNext()){
+    for(Node ptr = head; ptr.getNext() != null; ptr = ptr.getNext()){
       count ++;
     }
     return count;
   }
 
-  public void remove(int index){
+  public static void remove(int index){
     Node ptr = head;
     Node nxt = head.getNext().getNext();
     for(int x = 0; x < index; x++){    //x may need to equal 1.
@@ -43,8 +64,26 @@ public class TestListReferenceBased{
     ptr.setNext(nxt);
   }
 
+  public static int get(int index){
+    Node ptr = head.getNext();
+    for(int x = 0; x < index; x++){
+      ptr = ptr.getNext();
+    }
+    return ptr.getData();
+  }
 
-  private class Node {
+  public static void removeAll(){
+    for(Node ptr = head; ptr.getNext() != null; ptr = ptr.getNext()){
+      remove(ptr.getData());
+    }
+
+  }
+
+
+
+//******************************************
+//******************************************
+  private static class Node {
     private Node next;
     private int data;
     //private int count;
