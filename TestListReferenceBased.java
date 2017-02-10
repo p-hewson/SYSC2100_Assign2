@@ -1,17 +1,24 @@
 public class TestListReferenceBased{
   private static Node head = new Node(null);
+
+/** Main class
+* Initializes a linked list
+*/
   public static void main(String[] args){
     Node node0 = new Node(12,null);
     Node node1 = new Node(3,null);
     Node node2 = new Node(25,null);
     Node node3 = new Node(18,null);
     Node node4 = new Node(13,null);
+    Node node5 = new Node(17,null);
+    remove(4);
 
     Add(node0,0);
     Add(node1,1);
     Add(node2,2);
     Add(node3,3);
     Add(node4,0);
+    Add(node5,2);
     System.out.print(size(head));
     System.out.print(" Items in the linked list: ");
     for(Node ptr = head; ptr.getNext() != null; ptr = ptr.getNext()){
@@ -56,12 +63,13 @@ public class TestListReferenceBased{
 
   public static void remove(int index){
     Node ptr = head;
-    Node nxt = head.getNext().getNext();
-    for(int x = 0; x < index; x++){    //x may need to equal 1.
+    Node nxt = head.getNext();
+    for(int x = 1; x < index; x++){
       ptr = ptr.getNext();
       nxt = nxt.getNext();
     }
-    ptr.setNext(nxt);
+    ptr.setNext(ptr.getNext().getNext());
+    nxt.setNext(null);
   }
 
   public static int get(int index){
@@ -101,7 +109,7 @@ public class TestListReferenceBased{
     }
 
     public Node getNext(){
-      return next;
+        return next;
     }
 
     public void setNext(Node next){
